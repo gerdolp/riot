@@ -11,18 +11,12 @@ GameOfLifeSim::GameOfLifeSim(int64_t aMinBounds, int64_t aMaxBounds)
 
 bool GameOfLifeSim::IsCellAlive(const Cell& aCell, bool aWasAlive)
 {
-	if (aWasAlive)
-	{
-		if (aCell.NeighborCount < 2 || aCell.NeighborCount > 3)
-			return false;
-	}
-	else
-	{
-		if (aCell.NeighborCount != 3)
-			return false;
-	}
+	if (aCell.NeighborCount == 3)
+		return true;
+	else if (aWasAlive && aCell.NeighborCount == 2)
+		return true;
 
-	return true;
+	return false;
 }
 
 void GameOfLifeSim::IncrementNeighbors(SimulationMap& writeMap, const int64_t aCol, const int64_t aRow) const
